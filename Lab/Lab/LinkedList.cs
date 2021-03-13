@@ -49,18 +49,35 @@ namespace Lab1
 		public void Add(T data)
 		{
 			var item = new Item<T>(data);
-			var current = First;
 
-			if(Compare(current, item))
+			if (Last != null)
 			{
+				var previous = First;
+				var current = previous.Next;
 
-			}
+				if (Compare(previous, item))
+				{
+					First = item;
+					First.Next = previous;
+					Count++;
+					return;
+				}
+				
+				while(current != null)
+				{
+					if (Compare(current, item))
+					{
+						item.Next = current;
+						previous.Next = item;
+						Count++;
+						return;
+					}
 
-			if(Last != null)
-			{
-				Last.Next = item;
+					previous = current;
+					current = previous.Next;
+				}
+				previous.Next = item;
 				Last = item;
-				Count++;
 			}
 			else
 			{

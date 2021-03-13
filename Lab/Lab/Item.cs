@@ -1,10 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Lab1
+﻿namespace Lab1
 {
-	class Item
+	public class Item<T>
 	{
+		private T data = default(T);
+		public T Data
+		{
+			get
+			{
+				return data;
+			}
+			set
+			{
+				if (value != null)
+					data = value;
+			}
+		}
+		public Item<T> Next { get; set; }
+
+		public Item(T data)
+		{
+			Data = data;
+		}
 	}
 }

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Lab1
 {
-	public class LinkedList<T>
+	public class LinkedList<T> : IEnumerable
 	{
 		public Item<T> First { get; set; }
 		public Item<T> Last { get; set; }
@@ -61,6 +62,24 @@ namespace Lab1
 				First = item;
 				Last = item;
 				Count = 1;
+			}
+		}
+
+		public void PrintLinkedList()
+		{
+			foreach(var item in this)
+			{
+				Console.Write(item.ToString() + " ");
+			}
+		}
+
+		public IEnumerator GetEnumerator()
+		{
+			var current = First;
+			while(current != null)
+			{
+				yield return current.Data;
+				current = current.Next;
 			}
 		}
 	}

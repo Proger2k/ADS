@@ -21,6 +21,8 @@ namespace Lab
 			linkedList.Delete(435);
 			linkedList.Delete(11111);
 
+			linkedList.PrintLinkedList();
+
 			Console.ReadLine();
 		}
 	}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Lab1
@@ -13,9 +14,7 @@ namespace Lab1
 
 		public LinkedList()
 		{
-			First = null;
-			Last = null;
-			Count = 0;
+			Clear();
 		}
 
 		public void Delete(T data)
@@ -50,6 +49,12 @@ namespace Lab1
 		public void Add(T data)
 		{
 			var item = new Item<T>(data);
+			var current = First;
+
+			if(Compare(current, item))
+			{
+
+			}
 
 			if(Last != null)
 			{
@@ -63,6 +68,34 @@ namespace Lab1
 				Last = item;
 				Count = 1;
 			}
+		}
+
+		private bool Compare(Item<T> item1, Item<T> item2)
+		{
+			if(item1.Data is int || item1.Data is double)
+			{
+				return Convert.ToDouble(item1.Data) >= Convert.ToDouble(item2.Data);
+			}
+			else
+			{
+				List<string> mass = new List<string>();
+				mass.Add(item1.Data.ToString());
+				mass.Add(item2.Data.ToString());
+
+				mass.OrderBy(x => x);
+
+				if (mass[0] == item1.Data.ToString())
+					return true;
+				else
+					return false;
+			}
+		}
+
+		public void Clear()
+		{
+			First = null;
+			Last = null;
+			Count = 0;
 		}
 
 		public void PrintLinkedList()

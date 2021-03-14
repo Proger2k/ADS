@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Lab1
 {
@@ -118,6 +117,15 @@ namespace Lab1
 		{
 			if (First == null && Last == null)
 				return true;
+			return false;
+		}
+
+		public bool Search(T data)
+		{
+			foreach(var item in this)
+				if (item.Equals(data))
+					return true;
+
 			return false;
 		}
 

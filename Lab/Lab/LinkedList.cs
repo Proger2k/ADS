@@ -38,6 +38,10 @@ namespace Lab1
 				{
 					previous.Next = current.Next;
 					Count--;
+
+					if (First.Next == null)
+						Last = null;
+
 					return;
 				}
 
@@ -76,8 +80,10 @@ namespace Lab1
 					previous = current;
 					current = previous.Next;
 				}
+
 				previous.Next = item;
 				Last = item;
+				Count++;
 			}
 			else
 			{
@@ -108,6 +114,13 @@ namespace Lab1
 			}
 		}
 
+		public bool IsEmpty()
+		{
+			if (First == null && Last == null)
+				return true;
+			return false;
+		}
+
 		public void Clear()
 		{
 			First = null;
@@ -121,6 +134,7 @@ namespace Lab1
 			{
 				Console.Write(item.ToString() + " ");
 			}
+			Console.WriteLine();
 		}
 
 		public IEnumerator GetEnumerator()

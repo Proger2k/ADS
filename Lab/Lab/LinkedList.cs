@@ -136,6 +136,13 @@ namespace Lab1
 			Count = 0;
 		}
 
+		public void Read(LinkedList<int> list)
+		{
+			List<int> data = Console.ReadLine().Split(" ").Select(x => Convert.ToInt32(x)).ToList();
+			foreach (var item in data)
+				list.Add(item);
+		}
+
 		public void PrintLinkedList()
 		{
 			foreach(var item in this)

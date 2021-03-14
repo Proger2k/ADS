@@ -1,5 +1,7 @@
 ﻿using Lab1;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Lab
 {
@@ -7,7 +9,7 @@ namespace Lab
 	{
 		static void Main()
 		{
-			var linkedList = new LinkedList<int>();
+			var linkedList = new Lab1.LinkedList<int>();
 
 			Console.Write("Элементы списка: ");
 			linkedList.PrintLinkedList();
@@ -17,10 +19,7 @@ namespace Lab
 			Console.WriteLine("Добавление элементов");
 			Console.WriteLine();
 
-			linkedList.Add(10);
-			linkedList.Add(2);
-			linkedList.Add(22);
-			linkedList.Add(11);
+			linkedList.Read(linkedList);
 
 			Console.Write("Элементы списка: ");
 			linkedList.PrintLinkedList();

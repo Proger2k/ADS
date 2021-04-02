@@ -9,37 +9,21 @@ namespace Lab
 	{
 		static void Main()
 		{
-			var linkedList = new Lab1.LinkedList<int>();
+			var linkedList = new Lab1.LinkedList<string>();
+			var linkedList2 = new Lab1.LinkedList<string>();
+			
+			linkedList.Add("5");
+			linkedList.Add("wd");
+			linkedList.Add("adq");
+			linkedList.Add("ewere");
 
-			Console.Write("Элементы списка: ");
-			linkedList.PrintLinkedList();
-			Console.WriteLine("Пустой ли список ? " + linkedList.IsEmpty());
-			Console.WriteLine("Кол-во элементов в списке: " + linkedList.Count);
-			Console.WriteLine("Есть ли число 11 в списке ? " + linkedList.Search(11));
-			Console.WriteLine("Добавление элементов");
-			Console.WriteLine();
+			linkedList2.Add("4");
+			linkedList2.Add("5");
+			linkedList2.Add("adq");
+			linkedList2.Add("ewere");
+			linkedList2.Add("wd");
 
-			linkedList.Read(linkedList);
-
-			Console.Write("Элементы списка: ");
-			linkedList.PrintLinkedList();
-			Console.WriteLine("Пустой ли список ? " + linkedList.IsEmpty());
-			Console.WriteLine("Кол-во элементов в списке: " + linkedList.Count);
-			Console.WriteLine("Есть ли число 11 в списке ? " + linkedList.Search(11));
-			Console.WriteLine("Есть ли число 12 в списке ? " + linkedList.Search(12));
-			Console.WriteLine("Удаление элементов");
-			Console.WriteLine();
-
-			linkedList.Delete(10);
-			linkedList.Delete(2);
-			linkedList.Delete(22);
-			linkedList.Delete(11);
-
-			Console.Write("Элементы списка: ");
-			linkedList.PrintLinkedList();
-			Console.WriteLine("Пустой ли список ? " + linkedList.IsEmpty());
-			Console.WriteLine("Кол-во элементов в списке: " + linkedList.Count);
-			Console.WriteLine("Есть ли число 11 в списке ? " + linkedList.Search(11));
+			Console.WriteLine(linkedList2.Is(linkedList));
 
 			Console.ReadLine();
 		}

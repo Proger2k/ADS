@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Channels;
 
 namespace Lab1
 {
@@ -138,9 +139,17 @@ namespace Lab1
 
 		public void Read(LinkedList<int> list)
 		{
-			List<int> data = Console.ReadLine().Split(" ").Select(x => Convert.ToInt32(x)).ToList();
-			foreach (var item in data)
-				list.Add(item);
+			try
+			{
+				List<int> data = Console.ReadLine().Split(" ").Select(x => Convert.ToInt32(x)).ToList();
+				foreach (var item in data)
+					list.Add(item);
+			}
+			catch
+			{
+				Console.WriteLine("Неверный формат");
+				Console.WriteLine();
+			}
 		}
 
 		public void PrintLinkedList()
@@ -150,6 +159,24 @@ namespace Lab1
 				Console.Write(item.ToString() + " ");
 			}
 			Console.WriteLine();
+		}
+
+		public bool Is(LinkedList<T> list)
+		{
+			foreach (var item in list)
+			{
+				bool flag = true;
+				foreach (var item2 in this)
+				{
+					if (item.Equals(item2))
+					{
+						flag = false;
+					}
+				}
+				if (flag)
+					return false;
+			}
+			return true;
 		}
 
 		public IEnumerator GetEnumerator()

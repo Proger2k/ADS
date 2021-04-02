@@ -1,13 +1,13 @@
 ﻿namespace Lab2
 {
-    public class Node<T>
+    public class Node
     {
-        private T Data { get; set; }
-        private Node<T> Parent { get; set; }
-        private Node<T> LeftChild { get; set; }
-        private Node<T> RightChild { get; set; }
+        public double Data { get; set; }
+        public Node Parent { get; set; }
+        public Node LeftChild { get; set; }
+        public Node RightChild { get; set; }
 
-        public Node(T data)
+        public Node(double data)
         {
             Data = data;
         }

@@ -1,58 +1,28 @@
-﻿namespace Lab2
+﻿using System;
+
+namespace Lab2
 {
-    public class BalancedBinarySearchTree
+    public class BalancedBinarySearchTree<T>
+    where T: IComparable
     {
-        public Node MainNode { get; set; }
-        public int Count { get; set; }
+        public Node<T> Root { get; private set; }
+        public int Count { get; private set; }
 
-        public BalancedBinarySearchTree(double mainNode)
+        public BalancedBinarySearchTree()
         {
-            Count = 0;
-            MainNode = new Node(mainNode);;
         }
 
-        public void Insert(Node node, double x)
+        public void Insert(T data)
         {
-            if (node == null)
-                node = MainNode;
-            
-            if(node.Data.Equals(x))
-                return;
-            
-            if (node.Data > x)
-                if (node.LeftChild == null)
-                    node.LeftChild = new Node(x);
-                else
-                    Insert(node.LeftChild, x);
-            else 
-                if (node.RightChild == null)
-                    node.RightChild = new Node(x);
-                else
-                    Insert(node.RightChild, x);
-        }
-
-        public void DeleteNode(Node node, double x)
-        {
-            if(node == null)
-                return;
-            
-            if (node.Data.Equals(x))
+            if (Root == null)
             {
-                
+                Root = new Node<T>(data);
+                Count = 1;
+                return;
             }
-
-            if (x < node.Data)
-                DeleteNode(node.LeftChild, x);
-            else
-                DeleteNode(node.RightChild, x);
-        }
-
-        private void ChangeChild(Node node, Node childNode)
-        {
-            if (node.Parent.LeftChild == node)
-                node.Parent.LeftChild = childNode;
-            else
-                node.Parent.RightChild = childNode;
+            
+            Root.Insert(data);
+            Count++;
         }
     }
 }

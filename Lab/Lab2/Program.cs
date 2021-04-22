@@ -17,10 +17,7 @@ namespace Lab2
             tree.Insert(21);
             tree.Insert(42);
 
-            foreach (var item in tree.Inorder())
-            {
-                Console.Write(item + " ");
-            }
+            tree.PrintSorted();
             
             Console.ReadLine();
         }

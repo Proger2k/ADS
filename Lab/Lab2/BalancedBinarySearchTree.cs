@@ -13,19 +13,85 @@ namespace Lab2
         {
         }
 
-        public void Insert(T data)
+        #region 1) PrintSorted
+
+        public void PrintSorted()
         {
-            if (Root == null)
+            foreach (var item in Inorder())
             {
-                Root = new Node<T>(data);
-                Count = 1;
-                return;
+                Console.Write(item + " ");
             }
             
-            Root.Insert(data);
-            Count++;
+            Console.WriteLine();
+            
+            foreach (var item in InorderDescending())
+            {
+                Console.Write(item + " ");
+            }
+        }
+        
+        public List<T> Inorder()
+        {
+            if (Root == null)
+                return new List<T>();
+
+            return Inorder(Root);
+        }
+        
+        private List<T> Inorder(Node<T> node)
+        {
+            var list = new List<T>();
+            
+            if (node != null)
+            {
+                if (node.LeftChild != null)
+                {
+                    list.AddRange(Inorder(node.LeftChild));
+                }
+                
+                list.Add(node.Data);
+                
+                if (node.RightChild != null)
+                {
+                    list.AddRange(Inorder(node.RightChild));
+                }
+            }
+
+            return list;
+        }
+        
+        public List<T> InorderDescending ()
+        {
+            if (Root == null)
+                return new List<T>();
+
+            return InorderDescending(Root);
+        }
+        
+        private List<T> InorderDescending(Node<T> node)
+        {
+            var list = new List<T>();
+            
+            if (node != null)
+            {
+                if (node.RightChild != null)
+                {
+                    list.AddRange(InorderDescending(node.RightChild));
+                }
+                
+                list.Add(node.Data);
+                
+                if (node.LeftChild != null)
+                {
+                    list.AddRange(InorderDescending (node.LeftChild));
+                }
+            }
+
+            return list;
         }
 
+        #endregion
+        
         public List<T> Preorder()
         {
             if (Root == null)
@@ -84,35 +150,18 @@ namespace Lab2
 
             return list;
         }
-        
-        public List<T> Inorder()
+
+        public void Insert(T data)
         {
             if (Root == null)
-                return new List<T>();
-
-            return Inorder(Root);
-        }
-        
-        private List<T> Inorder(Node<T> node)
-        {
-            var list = new List<T>();
-            
-            if (node != null)
             {
-                if (node.LeftChild != null)
-                {
-                    list.AddRange(Inorder(node.LeftChild));
-                }
-                
-                list.Add(node.Data);
-                
-                if (node.RightChild != null)
-                {
-                    list.AddRange(Inorder(node.RightChild));
-                }
+                Root = new Node<T>(data);
+                Count = 1;
+                return;
             }
-
-            return list;
+            
+            Root.Insert(data);
+            Count++;
         }
     }
 }

@@ -203,10 +203,32 @@ namespace Lab2
         {
             if (Root == null)
                 return;
+            if(Convert.ToInt32(Root.Data) % 2 == 0)
+                DeleteRoot();
 
             FindNode(Root);
+            
+            //TODO 
         }
 
+        private void DeleteRoot()
+        {
+            if (Root.LeftChild == null && Root.RightChild == null)
+                Root = null;
+            else if (Root.LeftChild != null && Root.RightChild == null)
+                Root = Root.LeftChild;
+            else if (Root.LeftChild == null && Root.RightChild != null)
+                Root = Root.RightChild;
+            else
+            {
+                if(Root.RightChild != null)
+                    _min = Root.RightChild.Data;
+                
+                RemoveNodeWithTwoChild(Root.RightChild);
+                Root.Data = _min;
+            }
+        }
+        
         private void FindNode(Node<T> node)
         {
             if (node != null)
@@ -240,7 +262,7 @@ namespace Lab2
                 if(node.RightChild != null)
                     _min = node.RightChild.Data;
                 
-                RemoveNodeWithTwoChild(node);
+                RemoveNodeWithTwoChild(node.RightChild);
                 node.Data = _min;
             }
         }
@@ -259,6 +281,7 @@ namespace Lab2
             if(child != null)
                 child.Parent = parent.Parent;
         }
+        
         private void RemoveNodeWithTwoChild(Node<T> node)
         {
             if(node == null)
@@ -275,40 +298,85 @@ namespace Lab2
 
         #endregion
 
-        #region 5) FindMiddle()
+        #region 5) FindMiddle
 
-        
+        private T _max;
+        private double _average;
 
-        #endregion
-        
-        public List<T> Preorder()
+        /// <summary>
+        /// It returns the tree key which is the nearest to the Valuemid = (keymin + keymax) / 2.
+        /// </summary>
+        public double FindMiddle()
         {
             if (Root == null)
-                return new List<T>();
+                return Double.MinValue;
+            
+            FindMax(Root);
+            FindMin(Root);
+            
+            _average = (Convert.ToDouble(_max) + Convert.ToDouble(_min)) / 2;
+            
+            _smallestDifference = Double.MaxValue;
+            
+            FindMiddle(Root);
 
-            return Preorder(Root);
+            return _nodeData;
+        }
+        
+        private void FindMax(Node<T> node)
+        {
+            if (node == null)
+                return;
+
+            _max = node.Data;
+            
+            FindMax(node.RightChild);
         }
 
-        private List<T> Preorder(Node<T> node)
+        private void FindMin(Node<T> node)
         {
-            var list = new List<T>();
+            if (node == null)
+                return;
             
+            _min = node.Data;
+            
+            FindMin(node.LeftChild);
+        }
+        
+        private double _smallestDifference;
+        private double _nodeData;
+        
+        private void FindMiddle(Node<T> node)
+        {
             if (node != null)
             {
-                list.Add(node.Data);
+                double difference = _average - Convert.ToDouble(node.Data);
+                if (Math.Abs(difference) < Math.Abs(_smallestDifference))
+                {
+                    _smallestDifference = difference;
+                    _nodeData = Convert.ToDouble(node.Data);
+                }
+                
                 if (node.LeftChild != null)
                 {
-                    list.AddRange(Preorder(node.LeftChild));
+                    FindMiddle(node.LeftChild);
                 }
 
                 if (node.RightChild != null)
                 {
-                    list.AddRange(Preorder(node.RightChild));
+                    FindMiddle(node.RightChild);
                 }
             }
-
-            return list;
         }
+
+        #endregion
+
+        #region 6) DeleteDuplicate
+
+        
+
+        #endregion
+
         
         public List<T> Postorder()
         {

@@ -192,11 +192,91 @@ namespace Lab2
 
         #endregion
 
-        #region DeleteEven
-        /// <summary>
-        /// It deletes all even keys from a BBST. (Result is also a BBST) 
-        /// </summary>
+        #region 4) DeleteEven
         
+        /// <summary>
+        /// It deletes all even keys from a BBST. (Result is also a BBST)
+        ///
+        /// Preorder
+        /// </summary>
+        public void DeleteEven()
+        {
+            if (Root == null)
+                return;
+
+            FindNode(Root);
+        }
+
+        private void FindNode(Node<T> node)
+        {
+            if (node != null)
+            {
+                if (Convert.ToInt32(node.Data) % 2 == 0)
+                    DeleteEven(node);
+                    
+                if (node.LeftChild != null)
+                {
+                    FindNode(node.LeftChild);
+                }
+
+                if (node.RightChild != null)
+                {
+                    FindNode(node.RightChild);
+                }
+            }
+        }
+
+        private T _min;
+        private void DeleteEven(Node<T> node)
+        {
+            if (node.LeftChild == null && node.RightChild == null)
+                RemoveNodeWithOneChildOrNoChild(node, null);
+            else if (node.LeftChild != null && node.RightChild == null)
+                RemoveNodeWithOneChildOrNoChild(node, node.LeftChild);
+            else if (node.LeftChild == null && node.RightChild != null) 
+                RemoveNodeWithOneChildOrNoChild(node, node.RightChild);
+            else
+            {
+                if(node.RightChild != null)
+                    _min = node.RightChild.Data;
+                
+                RemoveNodeWithTwoChild(node);
+                node.Data = _min;
+            }
+        }
+        
+        private void RemoveNodeWithOneChildOrNoChild(Node<T> parent, Node<T> child)
+        {
+            if (parent.Parent.LeftChild == parent)
+            {
+                parent.Parent.LeftChild = child;
+            }
+            else if (parent.Parent.RightChild == parent)
+            {
+                parent.Parent.RightChild = child;
+            }
+            
+            if(child != null)
+                child.Parent = parent.Parent;
+        }
+        private void RemoveNodeWithTwoChild(Node<T> node)
+        {
+            if(node == null)
+                return;
+            
+            if(node.LeftChild == null && (_min.CompareTo(node.Data) == 1 || _min.CompareTo(node.Data) == 0))
+                RemoveNodeWithOneChildOrNoChild(node, node.RightChild);
+            
+            if(_min.CompareTo(node.Data) == 1)
+                _min = node.Data;
+            
+            RemoveNodeWithTwoChild(node.LeftChild);
+        }
+
+        #endregion
+
+        #region 5) FindMiddle()
+
         
 
         #endregion

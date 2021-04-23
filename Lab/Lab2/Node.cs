@@ -5,8 +5,8 @@ namespace Lab2
     public class Node<T> : IComparable
     where T : IComparable
     {
-        public T Data { get; private set; }
-        public Node<T> Parent { get; private set; }
+        public T Data { get; set; }
+        public Node<T> Parent { get; set; }
         public Node<T> LeftChild { get; set; }
         public Node<T> RightChild { get; set; }
         
@@ -29,7 +29,10 @@ namespace Lab2
             if (Data.CompareTo(data) == 1)
             {
                 if (LeftChild == null)
+                {
                     LeftChild = node;
+                    LeftChild.Parent = this;
+                }
                 else
                 {
                     LeftChild.Insert(data);
@@ -38,7 +41,10 @@ namespace Lab2
             else
             {
                 if (RightChild == null)
+                {
                     RightChild = node;
+                    RightChild.Parent = this;
+                }
                 else
                 {
                     RightChild.Insert(data);

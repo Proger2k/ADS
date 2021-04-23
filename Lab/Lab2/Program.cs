@@ -16,11 +16,15 @@ namespace Lab2
             tree.Insert(9);
             tree.Insert(21);
             tree.Insert(42);
+            tree.Insert(56);
+            tree.Insert(41);
+            tree.Insert(43);
+            
 
             tree.PrintSorted();
             Console.WriteLine();
-            Console.WriteLine(tree.CountNode());
-            Console.WriteLine(tree.SumKeys());
+            tree.DeleteEven();
+            tree.PrintSorted();
             
             Console.ReadLine();
         }

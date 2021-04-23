@@ -31,13 +31,22 @@ namespace Lab2
             tree.Insert(41);
             tree.Insert(43);
             
+            var tree2 = new BalancedBinarySearchTree<int>();
+            tree2.Insert(-12);
+            tree2.Insert(-8);
+            tree2.Insert(-10);
+            tree2.Insert(-10);
+            tree2.Insert(-13);
+            tree2.Insert(-34);
+
+            
             
             tree.PrintSorted();
             Console.WriteLine();
             Console.WriteLine();
 
-            var tree2 = tree.CopyBBST();
-            tree2.PrintSorted();
+            tree.InsertBBST(tree2);
+            tree.PrintSorted();
             
             /*
             tree.PrintSorted();

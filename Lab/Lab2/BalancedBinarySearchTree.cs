@@ -485,6 +485,35 @@ namespace Lab2
         
         #endregion
 
+        #region 9) InsertBBST
+
+        public void InsertBBST(BalancedBinarySearchTree<T> tree)
+        {
+            InsertBBST(tree.Root);
+            
+            //TODO
+        }
+
+        private void InsertBBST(Node<T> node)
+        {
+            if(node == null)
+                return;
+            
+            Insert(node.Data);
+
+            InsertBBST(node.LeftChild);
+            InsertBBST(node.RightChild);
+            
+        }
+
+        #endregion
+
+        #region MyRegion
+
+        
+
+        #endregion
+
         #region Postorder
         public List<T> Postorder()
         {

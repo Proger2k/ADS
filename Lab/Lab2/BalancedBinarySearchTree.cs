@@ -240,11 +240,17 @@ namespace Lab2
                 {
                     FindNode(node.LeftChild);
                 }
-
+                
+                if (Convert.ToInt32(node.Data) % 2 == 0)
+                    DeleteEven(node);
+                
                 if (node.RightChild != null)
                 {
                     FindNode(node.RightChild);
                 }
+                
+                if (Convert.ToInt32(node.Data) % 2 == 0)
+                    DeleteEven(node);
             }
         }
 

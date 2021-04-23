@@ -10,13 +10,20 @@ namespace Lab2
             tree.Insert(12);
             tree.Insert(8);
             tree.Insert(10);
+            tree.Insert(10);
             tree.Insert(13);
             tree.Insert(34);
+            tree.Insert(34);
+            tree.Insert(32);
             tree.Insert(28);
             tree.Insert(9);
             tree.Insert(21);
             tree.Insert(42);
+            tree.Insert(42);
+            tree.Insert(42);
             tree.Insert(56);
+            tree.Insert(58);
+            tree.Insert(60);
             tree.Insert(41);
             tree.Insert(43);
             

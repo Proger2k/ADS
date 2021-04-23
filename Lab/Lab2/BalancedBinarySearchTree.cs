@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace Lab2
 {
@@ -379,6 +380,9 @@ namespace Lab2
 
         #region 6) DeleteDuplicate
         
+        /// <summary>
+        /// It deletes all duplicate values from a BBST. (Result is also a BBST with a single value of each key.)
+        /// </summary>
         public void DeleteDuplicate()
         {
             if (Root == null)
@@ -398,7 +402,7 @@ namespace Lab2
         {
             if (node != null)
             {
-                if (Convert.ToInt32(node.Data) % 2 == 0)
+                if (node.RightChild != null && node.Data.Equals(node.RightChild.Data))
                     Delete(node);
                     
                 if (node.LeftChild != null)
@@ -406,7 +410,7 @@ namespace Lab2
                     DeleteDuplicate(node.LeftChild);
                 }
                 
-                if (Convert.ToInt32(node.Data) % 2 == 0)
+                if (node.RightChild != null && node.Data.Equals(node.RightChild.Data))
                     Delete(node);
                 
                 if (node.RightChild != null)
@@ -414,13 +418,72 @@ namespace Lab2
                     DeleteDuplicate(node.RightChild);
                 }
                 
-                if (Convert.ToInt32(node.Data) % 2 == 0)
+                if (node.RightChild != null && node.Data.Equals(node.RightChild.Data))
                     Delete(node);
             }
         }
 
         #endregion
-                
+
+        #region 7) FindSecondLargest
+
+        private double _secondLargest;
+        
+        /// <summary>
+        /// It returns the second largest key of a BBST without deleting it
+        /// </summary>
+        /// <returns></returns>
+        public double FindSecondLargest()
+        {
+            FindMax(Root);
+
+            _secondLargest = Convert.ToDouble(_max) - 100000;
+            FindSecondLargest(Root);
+            
+            return _secondLargest;
+        }
+
+        private void FindSecondLargest(Node<T> node)
+        {
+            if (node == null)
+                return;
+
+            if (Convert.ToDouble(node.Data) < Convert.ToDouble(_max))
+                _secondLargest = Convert.ToDouble(node.Data);
+            
+            FindSecondLargest(node.RightChild);
+        }
+        
+        #endregion
+
+        #region 8) CopyBBST
+
+        private BalancedBinarySearchTree<T> _tree;
+        
+        /// <summary>
+        /// It creates and returns a copy of a given BBST.
+        /// </summary>
+        public BalancedBinarySearchTree<T> CopyBBST()
+        {
+            _tree = new BalancedBinarySearchTree<T>();
+
+            CopyBBST(Root);
+            
+            return _tree;
+        }
+
+        private void CopyBBST(Node<T> node)
+        {
+            if(node == null)
+                return;
+            
+            _tree.Insert(node.Data);
+
+            CopyBBST(node.LeftChild);
+            CopyBBST(node.RightChild);
+        }
+        
+        #endregion
 
         #region Postorder
         public List<T> Postorder()
@@ -455,8 +518,6 @@ namespace Lab2
         
 
         #endregion
-
-
-
+        
     }
 }

@@ -25,9 +25,25 @@ namespace Lab2
             tree.Insert(58);
             tree.Insert(60);
             tree.Insert(41);
+            tree.Insert(41);
+            tree.Insert(41);
+            tree.Insert(41);
+            tree.Insert(41);
             tree.Insert(43);
             
+            
+            tree.PrintSorted();
+            Console.WriteLine();
+            Console.WriteLine();
 
+            var tree2 = tree.CopyBBST();
+            tree2.PrintSorted();
+            
+            /*
+            tree.PrintSorted();
+            Console.WriteLine();
+            Console.WriteLine(tree.FindSecondLargest());
+            tree.DeleteDuplicate();
             tree.PrintSorted();
             Console.WriteLine();
             
@@ -38,7 +54,7 @@ namespace Lab2
             Console.WriteLine();
             
             Console.WriteLine(tree.FindMiddle());
-            
+            */
             Console.ReadLine();
         }
     }

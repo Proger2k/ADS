@@ -559,6 +559,35 @@ namespace Lab2
 
         #endregion
 
+        #region 14) FatherNode
+        
+        /// <summary>
+        /// It returns the key of the father node for the node with the argument key, if the argument key belongs to the calling tree object, otherwise it returns -10000.
+        /// </summary>
+        public double FatherNode(double data)
+        {
+            FindNode(Root, data);
+            if (_requiredNode == null || _requiredNode.Data.Equals(Root.Data))
+                return -10000;
+
+            return Convert.ToDouble(_requiredNode.Parent.Data);
+        }
+
+        private Node<T> _requiredNode;
+        private void FindNode(Node<T> node, double value)
+        {
+            if(node == null)
+                return;
+
+            if ((Convert.ToDouble(node.Data) == value) && _requiredNode == null)
+                _requiredNode = node;
+            
+            FindNode(node.LeftChild, value);
+            FindNode(node.RightChild, value);
+        }
+
+        #endregion
+
         #region Postorder
         public List<T> Postorder()
         {

@@ -61,12 +61,10 @@ namespace Lab2
             tree.PrintSorted();
             Console.WriteLine();
             Console.WriteLine();
+
+            Console.WriteLine(tree.FatherNode(34));
             
-            tree.PrintSorted();
-
-            Console.WriteLine();
-
-            Console.WriteLine(tree.ContainsBBST(tree2));
+            
             /*
             tree.PrintSorted();
             Console.WriteLine();

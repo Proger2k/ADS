@@ -487,6 +487,10 @@ namespace Lab2
 
         #region 9) InsertBBST
 
+        /// <summary>
+        /// It inserts al keys of BBST2 into a BBST1. Result is BBST1 which is balanced.
+        /// </summary>
+        /// <param name="tree"></param>
         public void InsertBBST(BalancedBinarySearchTree<T> tree)
         {
             InsertBBST(tree.Root);
@@ -508,9 +512,50 @@ namespace Lab2
 
         #endregion
 
-        #region MyRegion
+        #region 10) ContainsBBST 
 
-        
+        /// <summary>
+        /// It determines if all keys of BBST2 are contained in BBST1. If so it returns true, otherwise false.
+        /// </summary>
+        public bool ContainsBBST(BalancedBinarySearchTree<T> tree)
+        {
+            _containNode = false;
+            _containsBBST = true;
+            
+            Traversal(tree.Root);
+
+            return _containsBBST;
+        }
+
+        private bool _containNode;
+        private bool _containsBBST;
+
+        private void Traversal(Node<T> node)
+        {
+            if(node == null)
+                return;
+
+            ContainsBBST(Root, node);
+            if (!_containNode)
+                _containsBBST = false;
+
+            _containNode = false;
+            
+            Traversal(node.LeftChild);
+            Traversal(node.RightChild);
+        }
+
+        private void ContainsBBST(Node<T> node, Node<T> val)
+        {
+            if(node == null)
+                return;
+
+            if (node.Data.Equals(val.Data))
+                _containNode = true;
+            
+            ContainsBBST(node.LeftChild, val);
+            ContainsBBST(node.RightChild, val);
+        }
 
         #endregion
 

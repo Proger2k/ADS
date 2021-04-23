@@ -13,32 +13,52 @@ namespace Lab2
         {
         }
 
+        public void Insert(T data)
+        {
+            if (Root == null)
+            {
+                Root = new Node<T>(data);
+                Count = 1;
+                return;
+            }
+            
+            Root.Insert(data);
+            Count++;
+        }
+        
         #region 1) PrintSorted
-
+        
+        /// <summary>
+        /// It prints keys of a BBST in 2 lines:
+        ///     -Sorted in ascending order (first line)
+        ///     -Sorted in descending order (second line )
+        ///
+        /// Inorder
+        /// </summary>
         public void PrintSorted()
         {
-            foreach (var item in Inorder())
+            foreach (var item in Ascending())
             {
                 Console.Write(item + " ");
             }
             
             Console.WriteLine();
             
-            foreach (var item in InorderDescending())
+            foreach (var item in Descending())
             {
                 Console.Write(item + " ");
             }
         }
         
-        public List<T> Inorder()
+        private List<T> Ascending ()
         {
             if (Root == null)
                 return new List<T>();
 
-            return Inorder(Root);
+            return Ascending(Root);
         }
         
-        private List<T> Inorder(Node<T> node)
+        private List<T> Ascending(Node<T> node)
         {
             var list = new List<T>();
             
@@ -46,29 +66,29 @@ namespace Lab2
             {
                 if (node.LeftChild != null)
                 {
-                    list.AddRange(Inorder(node.LeftChild));
+                    list.AddRange(Ascending(node.LeftChild));
                 }
                 
                 list.Add(node.Data);
                 
                 if (node.RightChild != null)
                 {
-                    list.AddRange(Inorder(node.RightChild));
+                    list.AddRange(Ascending(node.RightChild));
                 }
             }
 
             return list;
         }
         
-        public List<T> InorderDescending ()
+        private List<T> Descending ()
         {
             if (Root == null)
                 return new List<T>();
 
-            return InorderDescending(Root);
+            return Descending(Root);
         }
         
-        private List<T> InorderDescending(Node<T> node)
+        private List<T> Descending(Node<T> node)
         {
             var list = new List<T>();
             
@@ -76,19 +96,108 @@ namespace Lab2
             {
                 if (node.RightChild != null)
                 {
-                    list.AddRange(InorderDescending(node.RightChild));
+                    list.AddRange(Descending(node.RightChild));
                 }
                 
                 list.Add(node.Data);
                 
                 if (node.LeftChild != null)
                 {
-                    list.AddRange(InorderDescending (node.LeftChild));
+                    list.AddRange(Descending (node.LeftChild));
                 }
             }
 
             return list;
         }
+
+        #endregion
+
+        #region 2) CountNode
+        
+        private int _countNode;
+        
+        /// <summary>
+        /// It count the number of left son nodes in a BBST.
+        ///
+        /// Inorder
+        /// </summary>
+        public int CountNode()
+        {
+            _countNode = 0;
+            
+            if (Root == null)
+                return _countNode;
+
+            CountNode(Root);
+
+            return _countNode;
+        }
+        
+        private void CountNode(Node<T> node)
+        {
+            if (node != null)
+            {
+                if (node.LeftChild != null)
+                {
+                    _countNode++;
+                    CountNode(node.LeftChild);
+                }
+
+                if (node.RightChild != null)
+                {
+                    CountNode(node.RightChild);
+                }
+            }
+        }
+
+        #endregion
+        
+        #region 3) SumKeys
+
+        private double _sumKeys;
+        
+        /// <summary>
+        /// It finds the sum of keys in right son nodes in a BBST.
+        ///
+        /// Inorder
+        /// </summary>
+        public double SumKeys()
+        {
+            _sumKeys = 0;
+            
+            if (Root == null)
+                return _countNode;
+
+            SumKeys(Root);
+
+            return _sumKeys;
+        }
+        
+        private void SumKeys(Node<T> node)
+        {
+            if (node != null)
+            {
+                if (node.LeftChild != null)
+                {
+                    SumKeys(node.LeftChild);
+                }
+
+                if (node.RightChild != null)
+                {
+                    _sumKeys += Convert.ToDouble((node.RightChild.Data)); 
+                    SumKeys(node.RightChild);
+                }
+            }
+        }
+
+        #endregion
+
+        #region DeleteEven
+        /// <summary>
+        /// It deletes all even keys from a BBST. (Result is also a BBST) 
+        /// </summary>
+        
+        
 
         #endregion
         
@@ -151,17 +260,6 @@ namespace Lab2
             return list;
         }
 
-        public void Insert(T data)
-        {
-            if (Root == null)
-            {
-                Root = new Node<T>(data);
-                Count = 1;
-                return;
-            }
-            
-            Root.Insert(data);
-            Count++;
-        }
+
     }
 }

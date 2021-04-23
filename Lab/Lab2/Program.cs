@@ -7,7 +7,7 @@ namespace Lab2
         static void Main(string[] args)
         {
             var tree = new BalancedBinarySearchTree<int>();
-            tree.Insert(3);
+            tree.Insert(11);
             tree.Insert(8);
             tree.Insert(10);
             tree.Insert(12);
@@ -18,6 +18,9 @@ namespace Lab2
             tree.Insert(42);
 
             tree.PrintSorted();
+            Console.WriteLine();
+            Console.WriteLine(tree.CountNode());
+            Console.WriteLine(tree.SumKeys());
             
             Console.ReadLine();
         }

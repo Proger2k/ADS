@@ -6,8 +6,7 @@ namespace Lab2
     public class BalancedBinarySearchTree<T>
     where T: IComparable
     {
-        public Node<T> Root { get; private set; }
-        public int Count { get; private set; }
+        private Node<T> Root { get; set; }
 
         public BalancedBinarySearchTree()
         {
@@ -18,12 +17,10 @@ namespace Lab2
             if (Root == null)
             {
                 Root = new Node<T>(data);
-                Count = 1;
                 return;
             }
             
             Root.Insert(data);
-            Count++;
         }
         
         #region 1) PrintSorted
@@ -203,14 +200,61 @@ namespace Lab2
         {
             if (Root == null)
                 return;
-            if(Convert.ToInt32(Root.Data) % 2 == 0)
-                DeleteRoot();
 
-            FindNode(Root);
+            while (Convert.ToInt32(Root.Data) % 2 == 0)
+            {
+                DeleteRoot();
+            }
+
+            DeleteEven(Root);
             
             //TODO 
         }
+        
+        private void DeleteEven(Node<T> node)
+        {
+            if (node != null)
+            {
+                if (Convert.ToInt32(node.Data) % 2 == 0)
+                    Delete(node);
+                    
+                if (node.LeftChild != null)
+                {
+                    DeleteEven(node.LeftChild);
+                }
+                
+                if (Convert.ToInt32(node.Data) % 2 == 0)
+                    Delete(node);
+                
+                if (node.RightChild != null)
+                {
+                    DeleteEven(node.RightChild);
+                }
+                
+                if (Convert.ToInt32(node.Data) % 2 == 0)
+                    Delete(node);
+            }
+        }
 
+        private T _min;
+        private void Delete(Node<T> node)
+        {
+            if (node.LeftChild == null && node.RightChild == null)
+                RemoveNodeWithOneChildOrNoChild(node, null);
+            else if (node.LeftChild != null && node.RightChild == null)
+                RemoveNodeWithOneChildOrNoChild(node, node.LeftChild);
+            else if (node.LeftChild == null && node.RightChild != null) 
+                RemoveNodeWithOneChildOrNoChild(node, node.RightChild);
+            else
+            {
+                if(node.RightChild != null)
+                    _min = node.RightChild.Data;
+                
+                RemoveNodeWithTwoChild(node.RightChild);
+                node.Data = _min;
+            }
+        }
+        
         private void DeleteRoot()
         {
             if (Root.LeftChild == null && Root.RightChild == null)
@@ -226,50 +270,6 @@ namespace Lab2
                 
                 RemoveNodeWithTwoChild(Root.RightChild);
                 Root.Data = _min;
-            }
-        }
-        
-        private void FindNode(Node<T> node)
-        {
-            if (node != null)
-            {
-                if (Convert.ToInt32(node.Data) % 2 == 0)
-                    DeleteEven(node);
-                    
-                if (node.LeftChild != null)
-                {
-                    FindNode(node.LeftChild);
-                }
-                
-                if (Convert.ToInt32(node.Data) % 2 == 0)
-                    DeleteEven(node);
-                
-                if (node.RightChild != null)
-                {
-                    FindNode(node.RightChild);
-                }
-                
-                if (Convert.ToInt32(node.Data) % 2 == 0)
-                    DeleteEven(node);
-            }
-        }
-
-        private T _min;
-        private void DeleteEven(Node<T> node)
-        {
-            if (node.LeftChild == null && node.RightChild == null)
-                RemoveNodeWithOneChildOrNoChild(node, null);
-            else if (node.LeftChild != null && node.RightChild == null)
-                RemoveNodeWithOneChildOrNoChild(node, node.LeftChild);
-            else if (node.LeftChild == null && node.RightChild != null) 
-                RemoveNodeWithOneChildOrNoChild(node, node.RightChild);
-            else
-            {
-                if(node.RightChild != null)
-                    _min = node.RightChild.Data;
-                
-                RemoveNodeWithTwoChild(node.RightChild);
-                node.Data = _min;
             }
         }
         
@@ -378,12 +378,51 @@ namespace Lab2
         #endregion
 
         #region 6) DeleteDuplicate
-
         
+        public void DeleteDuplicate()
+        {
+            if (Root == null)
+                return;
+
+            while (Root.Data.Equals(Root.RightChild.Data))
+            {
+                DeleteRoot();
+            }
+            
+            DeleteDuplicate(Root);
+            
+            //TODO 
+        }
+        
+        private void DeleteDuplicate(Node<T> node)
+        {
+            if (node != null)
+            {
+                if (Convert.ToInt32(node.Data) % 2 == 0)
+                    Delete(node);
+                    
+                if (node.LeftChild != null)
+                {
+                    DeleteDuplicate(node.LeftChild);
+                }
+                
+                if (Convert.ToInt32(node.Data) % 2 == 0)
+                    Delete(node);
+                
+                if (node.RightChild != null)
+                {
+                    DeleteDuplicate(node.RightChild);
+                }
+                
+                if (Convert.ToInt32(node.Data) % 2 == 0)
+                    Delete(node);
+            }
+        }
 
         #endregion
+                
 
-        
+        #region Postorder
         public List<T> Postorder()
         {
             if (Root == null)
@@ -413,6 +452,10 @@ namespace Lab2
 
             return list;
         }
+        
+
+        #endregion
+
 
 
     }

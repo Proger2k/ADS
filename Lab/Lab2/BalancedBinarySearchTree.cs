@@ -633,6 +633,12 @@ namespace Lab2
 
         private bool _isEqualsBBST;
         private bool _isEqualNode;
+        
+        /// <summary>
+        /// It returns true if two BBSTs are equal ( if tree shapes and corresponding keys are the same). Otherwise it returns false.
+        /// </summary>
+        /// <param name="tree"></param>
+        /// <returns></returns>
         public bool EqualsBBST(BalancedBinarySearchTree<T> tree)
         {
             _isEqualsBBST = true;
@@ -678,6 +684,9 @@ namespace Lab2
         
         #endregion
 
+        #region 13) SymmetricalBBST
+        #endregion
+
         #region 14) FatherNode
         
         /// <summary>
@@ -707,38 +716,36 @@ namespace Lab2
 
         #endregion
 
-        #region Postorder
-        public List<T> Postorder()
-        {
-            if (Root == null)
-                return new List<T>();
+        #region CommonAncestor
 
-            return Postorder(Root);
+        /// <summary>
+        /// ). It returns the lowest common ancestor of the two nodes containing the argument keys.
+        /// </summary>
+
+        private int _commonAncestor;
+        public int CommonAncestor(int a, int b)
+        {
+            _commonAncestor = Convert.ToInt32(Root.Data);
+            CommonAncestor(Root, a, b);
+            
+            return _commonAncestor;
         }
-        
-        private List<T> Postorder(Node<T> node)
-        {
-            var list = new List<T>();
-            
-            if (node != null)
-            {
-                if (node.LeftChild != null)
-                {
-                    list.AddRange(Postorder(node.LeftChild));
-                }
 
-                if (node.RightChild != null)
-                {
-                    list.AddRange(Postorder(node.RightChild));
-                }
-                
-                list.Add(node.Data);
-            }
-            
-            return list;
+        private void CommonAncestor(Node<T> node, int a, int b)
+        {
+            if(node == null)
+                return;
+
+            int data = Convert.ToInt32(node.Data);
+
+            if (data > a && data > b)
+                CommonAncestor(node.LeftChild, a, b);
+            else if (data <= a && data <= b)
+                CommonAncestor(node.RightChild, a, b);
+            else
+                _commonAncestor = data;
         }
         
         #endregion
-        
     }
 }

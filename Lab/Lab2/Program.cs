@@ -47,11 +47,9 @@ namespace Lab2
             tree2.PrintSorted();
             Console.WriteLine();
             Console.WriteLine();
-            
 
-            Console.WriteLine(tree.FatherNode(34));
 
-            Console.WriteLine(tree2.EqualsBBST(tree));
+            Console.WriteLine(tree.CommonAncestor(28, 32));
             /*
             tree.PrintSorted();
             Console.WriteLine();

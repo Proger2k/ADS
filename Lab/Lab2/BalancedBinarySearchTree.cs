@@ -627,7 +627,56 @@ namespace Lab2
             IsBalanced(node.RightChild);
         }
 
-        #endregion IsBalanced 
+        #endregion IsBalanced
+
+        #region 12) EqualsBBST
+
+        private bool _isEqualsBBST;
+        private bool _isEqualNode;
+        public bool EqualsBBST(BalancedBinarySearchTree<T> tree)
+        {
+            _isEqualsBBST = true;
+            _isEqualNode = false;
+            
+            EqaulsBBST(tree.Root, Root);
+            if (!_isEqualsBBST)
+                return false;
+            
+            _isEqualNode = false;
+            EqaulsBBST(Root, tree.Root);
+            
+            return _isEqualsBBST;
+        }
+
+        private void EqaulsBBST(Node<T> node, Node<T> root)
+        {
+            if (node == null)
+                return;
+
+            FindEqual(root, node);
+            if (!_isEqualNode)
+                _isEqualsBBST = false;
+            
+            _isEqualNode = false;
+            
+            EqaulsBBST(node.LeftChild, root);
+            EqaulsBBST(node.RightChild, root);
+        }
+
+        private void FindEqual(Node<T> node, Node<T> val)
+        {
+            if (node == null)
+                return;
+
+            if (node.Data.Equals(val.Data) && node.LeftSubtreeHeight == val.LeftSubtreeHeight &&
+                node.RightSubtreeHeight == val.RightSubtreeHeight)
+                _isEqualNode = true;
+            
+            FindEqual(node.LeftChild, val);
+            FindEqual(node.RightChild, val);
+        }
+        
+        #endregion
 
         #region 14) FatherNode
         

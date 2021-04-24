@@ -22,15 +22,36 @@ namespace Lab2
             tree.Insert(90);
             tree.Insert(80);
             tree.Insert(120);
+            
+            var tree2 = new BalancedBinarySearchTree<int>();
+            tree2.Insert(50);
+            tree2.Insert(45);
+            tree2.Insert(60);
+            tree2.Insert(46);
+            tree2.Insert(30);
+            tree2.Insert(32);
+            tree2.Insert(47);
+            tree2.Insert(25);
+            tree2.Insert(28);
+            tree2.Insert(55);
+            tree2.Insert(56);
+            tree2.Insert(100);
+            tree2.Insert(90);
+            tree2.Insert(80);
+            tree2.Insert(120);
 
             
             tree.PrintSorted();
             Console.WriteLine();
             Console.WriteLine();
+            tree2.PrintSorted();
+            Console.WriteLine();
+            Console.WriteLine();
+            
 
             Console.WriteLine(tree.FatherNode(34));
 
-            Console.WriteLine(tree.IsBalanced());
+            Console.WriteLine(tree2.EqualsBBST(tree));
             /*
             tree.PrintSorted();
             Console.WriteLine();

@@ -7,64 +7,30 @@ namespace Lab2
         static void Main(string[] args)
         {
             var tree = new BalancedBinarySearchTree<int>();
-            //tree.Insert(12);
-            tree.Insert(8);
-            tree.Insert(10);
-            tree.Insert(10);
-            tree.Insert(13);
-            tree.Insert(34);
-            tree.Insert(34);
-            tree.Insert(32);
-            tree.Insert(28);
-            tree.Insert(9);
-            tree.Insert(21);
-            tree.Insert(42);
-            tree.Insert(42);
-            tree.Insert(42);
-            tree.Insert(56);
-            tree.Insert(58);
+            tree.Insert(50);
+            tree.Insert(45);
             tree.Insert(60);
-            tree.Insert(41);
-            tree.Insert(41);
-            tree.Insert(41);
-            tree.Insert(41);
-            tree.Insert(41);
-            tree.Insert(43);
-            
-            var tree2 = new BalancedBinarySearchTree<int>();
-            tree2.Insert(12);
-            tree2.Insert(8);
-            tree2.Insert(10);
-            tree2.Insert(10);
-            tree2.Insert(13);
-            tree2.Insert(34);
-            tree2.Insert(34);
-            tree2.Insert(32);
-            tree2.Insert(28);
-            tree2.Insert(9);
-            tree2.Insert(21);
-            tree2.Insert(42);
-            tree2.Insert(42);
-            tree2.Insert(42);
-            tree2.Insert(56);
-            tree2.Insert(58);
-            tree2.Insert(60);
-            tree2.Insert(41);
-            tree2.Insert(41);
-            tree2.Insert(41);
-            tree2.Insert(41);
-            tree2.Insert(41);
-            tree2.Insert(43);
+            tree.Insert(46);
+            tree.Insert(30);
+            tree.Insert(32);
+            tree.Insert(47);
+            tree.Insert(25);
+            tree.Insert(28);
+            tree.Insert(55);
+            tree.Insert(56);
+            tree.Insert(100);
+            tree.Insert(90);
+            tree.Insert(80);
+            tree.Insert(120);
 
-            
             
             tree.PrintSorted();
             Console.WriteLine();
             Console.WriteLine();
 
             Console.WriteLine(tree.FatherNode(34));
-            
-            
+
+            Console.WriteLine(tree.IsBalanced());
             /*
             tree.PrintSorted();
             Console.WriteLine();

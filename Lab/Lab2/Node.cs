@@ -9,6 +9,8 @@ namespace Lab2
         public Node<T> Parent { get; set; }
         public Node<T> LeftChild { get; set; }
         public Node<T> RightChild { get; set; }
+        public int LeftSubtreeHeight { get; set; }
+        public  int RightSubtreeHeight { get; set; }
         
         public Node(T data)
         {

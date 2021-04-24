@@ -208,8 +208,6 @@ namespace Lab2
             }
 
             DeleteEven(Root);
-            
-            //TODO 
         }
         
         private void DeleteEven(Node<T> node)
@@ -394,8 +392,6 @@ namespace Lab2
             }
             
             DeleteDuplicate(Root);
-            
-            //TODO 
         }
         
         private void DeleteDuplicate(Node<T> node)
@@ -494,8 +490,6 @@ namespace Lab2
         public void InsertBBST(BalancedBinarySearchTree<T> tree)
         {
             InsertBBST(tree.Root);
-            
-            //TODO
         }
 
         private void InsertBBST(Node<T> node)
@@ -559,6 +553,82 @@ namespace Lab2
 
         #endregion
 
+        #region 11) IsBalanced
+
+        private bool _isBalanced;
+        
+        /// <summary>
+        /// It returns true if the calling object is a balanced binary search tree, otherwise false.
+        /// </summary>
+        public bool IsBalanced()
+        {
+            CalculateSubtreeHeights();
+            _isBalanced = true;
+            
+            IsBalanced(Root);
+            
+            return _isBalanced;
+        }
+        private void CalculateSubtreeHeights()
+        {
+            if (Root == null)
+                return;
+
+            CalculateSubtreeHeights(Root);
+        }
+        
+        private void CalculateSubtreeHeights(Node<T> node)
+        {
+            if (node == null)
+                return;
+            
+            if (node.LeftChild != null)
+            {
+                CalculateSubtreeHeights(node.LeftChild);
+            }
+
+            if (node.LeftChild == null)
+                node.LeftSubtreeHeight = 0;
+            else
+            {
+                if(node.LeftChild.LeftSubtreeHeight > node.RightSubtreeHeight)
+                    node.LeftSubtreeHeight = node.LeftChild.LeftSubtreeHeight + 1;
+                else
+                    node.LeftSubtreeHeight = node.LeftChild.RightSubtreeHeight + 1;
+            }
+
+
+            if (node.RightChild != null)
+            {
+                CalculateSubtreeHeights(node.RightChild);
+            }
+            
+            if (node.RightChild == null)
+                node.RightSubtreeHeight = 0;
+            else
+            {
+                if(node.RightChild.RightSubtreeHeight > node.RightChild.LeftSubtreeHeight)
+                    node.RightSubtreeHeight = node.RightChild.RightSubtreeHeight + 1;
+                else
+                    node.RightSubtreeHeight = node.RightChild.LeftSubtreeHeight + 1;
+            }
+        }
+
+        private void IsBalanced(Node<T> node)
+        {
+            if (node == null)
+                return;
+
+            if (node.LeftSubtreeHeight > node.RightSubtreeHeight + 1 ||
+                node.LeftSubtreeHeight + 1 < node.RightSubtreeHeight)
+                _isBalanced = false;
+            
+            IsBalanced(node.LeftChild);
+            IsBalanced(node.RightChild);
+        }
+
+        #endregion IsBalanced 
+
         #region 14) FatherNode
         
         /// <summary>
@@ -615,11 +685,10 @@ namespace Lab2
                 
                 list.Add(node.Data);
             }
-
+            
             return list;
         }
         
-
         #endregion
         
     }
